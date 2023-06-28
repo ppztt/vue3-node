@@ -1,5 +1,6 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 import Login from '../views/Login'
+import routesConfig from './config'
 const routes = [
   {
     path: '/login',
@@ -22,4 +23,7 @@ const router = createRouter({
   routes
 })
 
+routesConfig.forEach(item =>{
+  router.addRoute('mainBox', item)
+})
 export default router
