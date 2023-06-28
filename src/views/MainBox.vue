@@ -1,18 +1,12 @@
 <template>
     <div>
-        <nav>123</nav>
+        <nav>1233</nav>
         <router-view></router-view>
     </div>
 </template>
 
-<script>
-export default {
-    setup () {
-        
+<script setup>
 
-        return {}
-    }
-}
 </script>
 
 <style lang="scss" scoped>
