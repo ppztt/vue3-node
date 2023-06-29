@@ -3,10 +3,7 @@ import Login from '../views/Login'
 import routesConfig from './config'
 import store from '@/store'
 const routes = [
-  {
-    path: '/',
-    redirect: '/login'
-  },
+
   {
     path: '/login',
     name: 'login',
@@ -20,6 +17,11 @@ const routes = [
     // which is lazy-loaded when the route is visited.
     component: () => import('../views/MainBox'),
 
+  },
+  {
+    path: '/:pathMatch(.*)*',
+    name: 'NotFound',
+    component: () => import('../views/notfound/NotFound')
   }
 ]
 
@@ -40,16 +42,16 @@ router.beforeEach((to, from, next) => {
       if (!store.state.isRouterGetter) {
         configRouter()
         next({ path: to.fullPath })
-      }else{
+      } else {
         next()
       }
     }
   }
 })
-const configRouter = ()=>{
+const configRouter = () => {
   routesConfig.forEach(item => {
     router.addRoute('mainbox', item)
   })
-  store.commit('changeRouterGetter',true)
+  store.commit('changeRouterGetter', true)
 }
 export default router

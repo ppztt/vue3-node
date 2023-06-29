@@ -31,6 +31,10 @@ const routes = [
         path: '/product-manage/productadd',
         component: () => import('../views/product-manage/ProductAdd')
     },
+    {
+        path: '/',
+        redirect: '/home'
+    }
 ]
 
 export default routes
