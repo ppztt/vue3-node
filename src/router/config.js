@@ -34,6 +34,11 @@ const routes = [
     {
         path: '/',
         redirect: '/home'
+    },
+    {
+        path: '/:pathMatch(.*)*',
+        name: 'NotFound',
+        component: () => import('../views/notfound/NotFound')
     }
 ]
 

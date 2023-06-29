@@ -17,11 +17,6 @@ const routes = [
     // which is lazy-loaded when the route is visited.
     component: () => import('../views/MainBox'),
 
-  },
-  {
-    path: '/:pathMatch(.*)*',
-    name: 'NotFound',
-    component: () => import('../views/notfound/NotFound')
   }
 ]
 
