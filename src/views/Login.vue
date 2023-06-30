@@ -35,6 +35,7 @@
 import { reactive, ref } from "vue";
 import { loadFull } from "tsparticles";
 import { useRouter } from "vue-router";
+import axios from 'axios'
 export default {
   setup() {
     const router = useRouter()
@@ -59,6 +60,9 @@ export default {
             console.log(valid)
             if(valid){
                 localStorage.setItem('token','ttwl')
+                axios.get('/users').then(res=>{
+                  console.log(res)
+                })
                 router.push('/home')
             }else{
 
