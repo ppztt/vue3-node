@@ -35,9 +35,12 @@
 import { reactive, ref } from "vue";
 import { loadFull } from "tsparticles";
 import { useRouter } from "vue-router";
+import { ElMessage } from 'element-plus'
+import {useStore} from 'vuex'
 import axios from 'axios'
 export default {
   setup() {
+    const store = useStore()
     const router = useRouter()
     const formLabelAlign = reactive({
       username: "",
@@ -59,11 +62,16 @@ export default {
         loginForm.value.validate((valid)=>{
             console.log(valid)
             if(valid){
-                localStorage.setItem('token','ttwl')
-                axios.get('/users').then(res=>{
-                  console.log(res)
+                // localStorage.setItem('token','ttwl')
+                axios.post('/admin/user/login',formLabelAlign).then(res=>{
+                  const data = res.data.data
+                  store.commit('changeUserInfo', data)
+                  if(res.data.ActionType === 'ok'){
+                    router.push("/home")
+                  }else{
+                    ElMessage.error('用户名或密码错误')
+                  }
                 })
-                router.push('/home')
             }else{
 
             }

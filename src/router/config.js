@@ -31,10 +31,7 @@ const routes = [
         path: '/product-manage/productadd',
         component: () => import('../views/product-manage/ProductAdd')
     },
-    {
-        path: '/',
-        redirect: '/home'
-    },
+
     {
         path: '/:pathMatch(.*)*',
         name: 'NotFound',

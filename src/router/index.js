@@ -3,7 +3,10 @@ import Login from '../views/Login'
 import routesConfig from './config'
 import store from '@/store'
 const routes = [
-
+  {
+    path: '/',
+    redirect: '/login'
+  },
   {
     path: '/login',
     name: 'login',

@@ -5,7 +5,7 @@ import Particles from "particles.vue3";
 import 'element-plus/dist/index.css'
 import router from './router'
 import store from './store'
-
+import './util/request'
 const app = createApp(App)
 app.use(ElementPlus)
 app.use(Particles)

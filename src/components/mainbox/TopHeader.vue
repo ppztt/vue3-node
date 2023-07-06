@@ -5,7 +5,7 @@
       <span>企业门户管理系统</span>
     </div>
     <div class="right">
-      <span>欢迎admin</span>
+      <span>欢迎{{ store.state.userInfo.username }}</span>
       <el-dropdown>
         <span class="el-dropdown-link">
           <el-icon :size="20" color="white"><UserFilled /></el-icon>
@@ -26,6 +26,7 @@ import { useStore } from "vuex";
 import { useRouter } from "vue-router";
 import { Menu, UserFilled } from "@element-plus/icons-vue";
 const store = useStore();
+const userInfo = store.state.userInfo
 const router = useRouter();
 const handleCollapse = () => {
   store.dispatch("changeCollapse");
@@ -35,6 +36,7 @@ const toUser = () => {
 };
 const toLogin = () => {
   localStorage.removeItem("token");
+  store.commit('clearUserInfo')
   router.push("/login");
 };
 </script>

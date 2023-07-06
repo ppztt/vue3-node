@@ -3,7 +3,8 @@ import createPersistedState from "vuex-persistedstate";
 export default createStore({
   state: {
     isRouterGetter: false,
-    isCollapse: true
+    isCollapse: true,
+    userInfo:{}
   },
   getters: {
   },
@@ -13,6 +14,17 @@ export default createStore({
     },
     changeIsCollapse(state, value) {
       state.isCollapse = !state.isCollapse
+    },
+    changeUserInfo(state, value){
+      console.log(state.userInfo)
+      state.userInfo = {
+        ...state.userInfo,
+        ...value
+      }
+      console.log(state.userInfo)
+    },
+    clearUserInfo(state){
+      state.userInfo = {}
     }
   },
   actions: {
@@ -23,6 +35,6 @@ export default createStore({
   modules: {
   },
   plugins: [createPersistedState({
-    paths: ['isCollapse']
+    paths: ['isCollapse','userInfo']
   })],
 })

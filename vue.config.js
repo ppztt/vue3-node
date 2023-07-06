@@ -3,14 +3,14 @@ module.exports = defineConfig({
   transpileDependencies: true,
   devServer:{
     proxy:{
+      "/users":{
+        target: 'http://localhost:3000',
+        changeOrigin: true
+      },
       "/admin":{
         target: 'http://localhost:3000',
         changeOrigin: true
       },
-      "/index":{
-        target: 'http://localhost:3000',
-        changeOrigin: true
-      }
     }
   }
 })

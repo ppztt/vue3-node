@@ -18,3 +18,32 @@ vue3使用ref需要先在script里面新建一个ref，const refs = ref()，再�
   })],
 ```
 
+# 4.上传FormData格式
+
+```js
+let Form = new FormData();
+      for (let i in userForm) {
+        Form.append(i, userForm[i]);
+      }
+      axios.post("/admin/user/updateInfo", Form,{
+          // 告诉后端文件格式
+        headers:{
+            "Content-Type": "multipart/form-data"
+        }
+      }).then((res) => {
+        console.log(res.data);
+      });
+```
+
+# 5.更新状态
+
+```js
+// 这样赋值后，在store.state.userInfo更新之后，它的值并没有变化，只有在页面刷新的时候才会改变，就导致使用到这个值的视图无法更新
+let userInfo = store.state.userInfo;
+// s计算属性
+let userInfo = computed(()=>{
+    return store.state.userInfo
+});
+
+```
+
