@@ -1,8 +1,8 @@
 <template>
     <div>
         <el-page-header
-            content="创建新闻"
-            icon=""
+            content="编辑新闻"
+            @back="handleBack()"
             title="新闻管理"
         />
         <el-form
@@ -22,7 +22,7 @@
                 label="内容"
                 prop="content"
             >
-                <editor @event="handleChange" />
+                <editor @event="handleChange" :content="newsForm.content" v-if="newsForm.content"/>
             </el-form-item>
 
             <el-form-item
@@ -58,19 +58,21 @@
                 <el-button
                     type="primary"
                     @click="submitForm()"
-                >添加新闻</el-button>
+                >更新新闻</el-button>
             </el-form-item>
         </el-form>
     </div>
 </template>
 
 <script setup>
-import { ref, reactive } from "vue";
+import { ref, reactive,onMounted } from "vue";
 import editor from "@/components/editor/Editor";
 import Upload from "@/components/upload/Upload";
 import upload from '@/util/updatedInfo'
-import {useRouter} from 'vue-router'
+import {useRouter,useRoute} from 'vue-router'
+import axios from 'axios'
 const router = useRouter()
+const route = useRoute()
 const newsFormRef = ref();
 const newsForm = reactive({
   title: "",
@@ -119,11 +121,24 @@ const submitForm = ()=>{
         if(valid){
             // console.log(newsForm)
             //后台通信,
-            await upload("/admin/news/add",newsForm)
-            router.push(`/news-manage/newslist`)
+            await upload("/admin/news/list",newsForm)
+            router.back()
         }
     })
 }
+
+const handleBack=()=>{
+    router.back()
+}
+//取当前页面数据
+onMounted(async ()=>{
+    // console.log(route.params.id)
+
+   const res = await  axios.get(`/admin/news/list/${route.params.id}`)
+   console.log(res.data.data[0])
+
+   Object.assign(newsForm,res.data.data[0])
+})
 </script>
 <style lang="scss" scoped>
 .el-form {

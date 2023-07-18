@@ -40,10 +40,14 @@ let Form = new FormData();
 ```js
 // 这样赋值后，在store.state.userInfo更新之后，它的值并没有变化，只有在页面刷新的时候才会改变，就导致使用到这个值的视图无法更新
 let userInfo = store.state.userInfo;
-// s计算属性
+// 使用计算属性
 let userInfo = computed(()=>{
     return store.state.userInfo
 });
 
 ```
+
+# 6.控制权限
+
+在控制权限上，除了控制页面显示，也要防止其他等级用户通过路径进入，可以在路由中添加属性去判断是否该显示，也可在路由守卫上判断控制拦截，后端上也可以做权限设置
 

@@ -28,6 +28,7 @@ const router = createRouter({
   routes
 })
 router.beforeEach((to, from, next) => {
+  console.log(to)
   if (to.name === 'login') {
     next()
   }
@@ -37,18 +38,34 @@ router.beforeEach((to, from, next) => {
         path: '/login'
       })
     } else {
+
       if (!store.state.isRouterGetter) {
         configRouter()
         next({ path: to.fullPath })
+      }
+      if (to.fullPath === '/use-manage/useradd' || to.fullPath === '/use-manage/userlist') {
+        console.log(store.state.userInfo.role)
+        if (store.state.userInfo.role === 1) {
+          next()
+        } else {
+          next({ path: from.fullPath })
+        }
       } else {
         next()
       }
     }
   }
+
 })
+const reqAdmin = (item) => {
+  if (item.requiredAdmin) {
+    return store.state.userInfo.role == 1
+  }
+  return true
+}
 const configRouter = () => {
   routesConfig.forEach(item => {
-    router.addRoute('mainbox', item)
+    reqAdmin(item) && router.addRoute('mainbox', item)
   })
   store.commit('changeRouterGetter', true)
 }

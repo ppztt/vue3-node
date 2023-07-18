@@ -9,7 +9,7 @@
         <el-icon><Avatar /></el-icon>
         <span>个人中心</span>
       </el-menu-item>
-      <el-sub-menu index="/use-manage">
+      <el-sub-menu index="/use-manage" v-admin>
         <template #title>
           <el-icon><Avatar /></el-icon>
           <span>用户管理</span>
@@ -45,8 +45,17 @@ import {
   Avatar,
 } from "@element-plus/icons-vue";
 import { useRoute } from "vue-router";
+import { useStore } from "vuex";
 const route = useRoute()
-console.log(route)
+const store = useStore()
+const vAdmin = {
+  mounted(el) {
+    console.log(el)
+    if(store.state.userInfo.role != 1){
+      el.parentNode.removeChild(el)
+    }
+  },
+}
 
 </script>
 

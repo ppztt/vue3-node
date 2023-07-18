@@ -9,11 +9,13 @@ const routes = [
     },
     {
         path: '/use-manage/useradd',
-        component: () => import('../views/use-manage/UserAdd')
+        component: () => import('../views/use-manage/UserAdd'),
+        requiredAdmin: true
     },
     {
         path: '/use-manage/userlist',
-        component: () => import('../views/use-manage/UserList')
+        component: () => import('../views/use-manage/UserList'),
+        requiredAdmin: true
     },
     {
         path: '/new-manage/newsadd',
