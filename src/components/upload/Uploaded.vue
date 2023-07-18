@@ -31,7 +31,7 @@ const handleChange = (file)=>{
   height: 178px;
   display: block;
 }
-::v-deep .avatar-uploader .el-upload {
+::v-deep .el-upload {
   border: 1px dashed var(--el-border-color);
   border-radius: 6px;
   cursor: pointer;
